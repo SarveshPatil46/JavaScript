@@ -16,7 +16,6 @@ class LinkedList {
         this.tail.next = newNode;
         this.tail = newNode;
         this.length++;
-        return this;
     }
 
     prepend(value) {
@@ -27,7 +26,6 @@ class LinkedList {
         newNode.next = this.head;
         this.head = newNode;
         this.length++;
-        return this;
     }
 
     printList() {
@@ -41,7 +39,6 @@ class LinkedList {
     }
 
     insert(index, value) {
-        //Check for proper parameters;
         if (index >= this.length) {
             return this.append(value);
         }
@@ -73,13 +70,33 @@ class LinkedList {
         leader.next = unwantedNode.next;
         this.length--;
     }
+
+    reverse() {
+        if (!this.head.next) {
+            return this.head;
+        }
+        let first = this.head;
+        this.tail = this.head;
+        let second = first.next;
+
+        while (second) {
+            const temp = second.next;
+            second.next = first;
+            first = second;
+            second = temp;
+        }
+
+        this.head.next = null;
+        this.head = first;
+    }
 }
 
 let myLinkedList = new LinkedList(10);
-myLinkedList.append(5);
-myLinkedList.append(16);
-myLinkedList.prepend(1);
-myLinkedList.insert(2, 99);
-myLinkedList.insert(20, 88);
-myLinkedList.remove(2);
-myLinkedList.printList();
+myLinkedList.append(5)
+myLinkedList.append(16)
+myLinkedList.prepend(1)
+myLinkedList.insert(2, 99)
+myLinkedList.insert(20, 88)
+myLinkedList.remove(2)
+myLinkedList.reverse()
+myLinkedList.printList()
